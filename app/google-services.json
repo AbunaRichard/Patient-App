@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510601520950",
+    "project_id": "smart-f40fa",
+    "storage_bucket": "smart-f40fa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510601520950:android:a3687cf95107d8cfdff597",
+        "android_client_info": {
+          "package_name": "com.example.patienttracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEZ7ttcZAlqgpr1YKuJbLVq_qpvN7fMjg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
