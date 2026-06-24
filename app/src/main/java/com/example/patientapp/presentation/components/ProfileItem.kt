@@ -1,6 +1,5 @@
 package com.example.patientapp.presentation.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,14 +14,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ProfileItem(
     icon: ImageVector,
-    title: String,
-    onClick: () -> Unit = {}
+    title: String
 ) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() }
             .padding(vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

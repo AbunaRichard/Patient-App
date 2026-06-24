@@ -65,7 +65,6 @@ class PatientDetailsViewModel @Inject constructor(
             }
         }
     }
-    private suspend fun savePatient(){
         val age= state.age.toIntOrNull()
         when{
             state.name.isEmpty()-> throw TextFieldException("Please Enter Name!")

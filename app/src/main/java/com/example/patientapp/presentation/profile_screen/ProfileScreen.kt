@@ -1,6 +1,5 @@
 package com.example.patientapp.presentation.profile_screen
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,7 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.patientapp.presentation.components.ProfileItem
@@ -41,7 +39,6 @@ import com.example.patientapp.presentation.components.ProfileStatCard
 
 @Composable
 fun ProfileScreen() {
-    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -155,10 +152,7 @@ fun ProfileScreen() {
 
                 ProfileItem(
                     icon = Icons.Default.Settings,
-                    title = "Account Settings",
-                    onClick = {
-                        Toast.makeText(context, "Account Settings Clicked", Toast.LENGTH_SHORT).show()
-                    }
+                    title = "Account Settings"
                 )
             }
         }
