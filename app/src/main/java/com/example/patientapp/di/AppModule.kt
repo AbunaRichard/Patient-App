@@ -3,6 +3,7 @@ package com.example.patientapp.di
 import android.app.Application
 import androidx.room.Room
 import com.example.patientapp.data.local.PatientDatabase
+import com.example.patientapp.data.remote.PatientApi
 import com.example.patientapp.data.repository.PatientRepositoryImpl
 import com.example.patientapp.domain.repository.PatientRepository
 import com.example.patientapp.utils.Constants.PATIENT_DATABASE
@@ -11,16 +12,21 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
     @Provides
     @Singleton
     fun providePatientDatabase(
-        app:Application
-    ):PatientDatabase{
+        app: Application
+    ): PatientDatabase {
         return Room.databaseBuilder(
             app,
             PatientDatabase::class.java,
@@ -36,12 +42,33 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun providePatientApi(): PatientApi {
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl(PatientApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(PatientApi::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideRepository(
-        db:PatientDatabase,
-        firestore: FirebaseFirestore
-    ):PatientRepository{
-        return PatientRepositoryImpl(dao = db.patientDao, firestore = firestore)
+        db: PatientDatabase,
+        firestore: FirebaseFirestore,
+        api: PatientApi
+    ): PatientRepository {
+        return PatientRepositoryImpl(
+            dao = db.patientDao,
+            firestore = firestore,
+            api = api
+        )
     }
 }
-
-
